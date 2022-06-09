@@ -13,8 +13,10 @@ print(number_list)`
 
     const [output, setOutput] = useState('');
 
+    var APIHOSTPORT = `${window._env_.REACT_APP_APIHOSTPORT}`;
+
     async function runCode() {
-        var URL = "http://localhost:8080/execute";
+        var URL = `http://${APIHOSTPORT}/execute`;
         var token = window.localStorage.getItem("user");
         console.log("t1:" + token);
         const response = await fetch(URL, {

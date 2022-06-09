@@ -6,8 +6,10 @@ export const AsciiArtPage = () => {
     const [text, setText] = useState('');
     const [output, setOutput] = useState('');
 
+    var APIHOSTPORT = `${window._env_.REACT_APP_APIHOSTPORT}`;
+
     async function createArt() {
-        var URL = "http://localhost:8080/asciiart";
+        var URL = `http://${APIHOSTPORT}/asciiart`;
         var token = window.localStorage.getItem("user");
         console.log("t1:" + token);
         const response = await fetch(URL, {

@@ -8,8 +8,10 @@ export const CommentsPage = () => {
     getComments();
   }, []);
 
+  var APIHOSTPORT = `${window._env_.REACT_APP_APIHOSTPORT}`;
+
   async function getComments() {
-    var URL = "http://localhost:8080/comments";
+    var URL = `http://${APIHOSTPORT}/comments`;
     var token = window.localStorage.getItem("user");
     console.log("t1:" + token);
     const response = await fetch(URL, {
@@ -24,7 +26,7 @@ export const CommentsPage = () => {
   }
 
   async function addComment(newComment) {
-    var URL = "http://localhost:8080/comments";
+    var URL = `http://${APIHOSTPORT}/comments`;
     var token = window.localStorage.getItem("user");
     console.log("t2:" + token);
     const response = await fetch(URL, {
