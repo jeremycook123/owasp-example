@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo } from "react";
+import { createContext, useContext, useMemo, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "./useLocalStorage";
 import axios from 'axios';
@@ -8,6 +8,16 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useLocalStorage("user", null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage["user"]) {
+      console.log("useEffect called...");
+      console.log(localStorage);
+      if (localStorage.getItem("user") != 'null') {
+        setUser(localStorage.getItem("user"));
+      }
+    }
+  }, []);
 
   const login = async (data) => {
     console.log(data);
@@ -28,6 +38,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setUser(null);
+    localStorage.removeItem("user");
     navigate("/", { replace: true });
   };
 
