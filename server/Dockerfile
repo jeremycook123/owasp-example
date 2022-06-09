@@ -9,7 +9,9 @@ WORKDIR app
 
 COPY src ./src
 COPY pom.xml .
+COPY target/webapp-insecure-1.0-SNAPSHOT.jar .
 RUN tree
 
 #CMD ["sleep", "3600"]
-CMD ["mvn", "spring-boot:run"]
+#CMD ["mvn", "spring-boot:run"]
+CMD ["java", "-jar", "webapp-insecure-1.0-SNAPSHOT.jar"]
