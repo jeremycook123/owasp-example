@@ -22,10 +22,10 @@ export const AuthProvider = ({ children }) => {
   const login = async (data) => {
     console.log(data);
 
-    const APIHOSTPORT = "localhost:8080"
-    var url = `http://${APIHOSTPORT}/login`;
+    var APIHOSTPORT = `${window._env_.REACT_APP_APIHOSTPORT}`;
+    var URL = `http://${APIHOSTPORT}/login`;
 
-    axios.post(url, data).then((response) => {
+    axios.post(URL, data).then((response) => {
         var token = response.data.token;
         console.log("token=" + token);
         setUser(token);
