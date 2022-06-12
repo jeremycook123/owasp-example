@@ -29,20 +29,28 @@ jobs:
       #run: mvn -B package --file ./server/pom.xml
       run: mvn -B clean package spring-boot:repackage --file ./server/pom.xml
 
+    - name: Client Install NPM dependencies
+      run: |
+        cd ./client
+        npm install
+        npm run build
+        tar -czf release-${{ env.RELEASE_VERSION }}.tar.gz build
+
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
         name: release-${{ env.RELEASE_VERSION }}
         path: | 
+          ./client/release-${{ env.RELEASE_VERSION }}.tar.gz
           ./server/target/webapp-insecure-1.0-SNAPSHOT.jar
 
-    # Create Release v1
     - name: Make Release
       uses: softprops/action-gh-release@v0.1.5
       if: startsWith(github.ref, 'refs/tags/')
       with:
         name: release-${{ env.RELEASE_VERSION }}
         files: |
+          ./client/release-${{ env.RELEASE_VERSION }}.tar.gz
           ./server/target/webapp-insecure-1.0-SNAPSHOT.jar
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
