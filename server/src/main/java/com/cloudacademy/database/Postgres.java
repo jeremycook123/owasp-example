@@ -19,7 +19,7 @@ public class Postgres {
                     .append(System.getenv("POSTGRES_HOSTPORT"))
                     .append("/")
                     .append(System.getenv("POSTGRES_DB"))
-                    .append("?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory")
+                    .append("?ssl=true&sslmode=require&sslfactory=org.postgresql.ssl.NonValidatingFactory")
                     .toString();
             System.out.println("db connection string: " + url);
             return DriverManager.getConnection(url,
