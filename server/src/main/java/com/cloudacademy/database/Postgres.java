@@ -14,16 +14,11 @@ public class Postgres {
     public static Connection connection() {
         try {
             Class.forName("org.postgresql.Driver");
-            String url = new StringBuilder()
-                    .append("jdbc:postgresql://")
-                    .append(System.getenv("POSTGRES_HOSTPORT"))
-                    .append("/")
-                    .append(System.getenv("POSTGRES_DB"))
-                    .append("?ssl=true&sslmode=require&sslfactory=org.postgresql.ssl.NonValidatingFactory")
-                    .toString();
-            System.out.println("db connection string: " + url);
+            String url = System.getenv("POSTGRES_CONNSTR");
+            System.out.println("postgres connection string: " + url);
             return DriverManager.getConnection(url,
-                    System.getenv("POSTGRES_USER"), System.getenv("POSTGRES_PASSWORD"));
+                                                System.getenv("POSTGRES_USER"), 
+                                                System.getenv("POSTGRES_PASSWORD"));
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName()+": "+e.getMessage());
