@@ -18,7 +18,10 @@ public class Postgres {
                     .append("jdbc:postgresql://")
                     .append(System.getenv("POSTGRES_HOSTPORT"))
                     .append("/")
-                    .append(System.getenv("POSTGRES_DB")).toString();
+                    .append(System.getenv("POSTGRES_DB"))
+                    .append("?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory")
+                    .toString();
+            System.out.println("db connection string: " + url);
             return DriverManager.getConnection(url,
                     System.getenv("POSTGRES_USER"), System.getenv("POSTGRES_PASSWORD"));
         } catch (Exception e) {
