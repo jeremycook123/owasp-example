@@ -17,6 +17,8 @@ public class CodeController {
                     consumes = "application/json",
                     produces = "application/json") 
     CodeResponse executeCode(@RequestHeader(value="x-auth-token") String token, @RequestBody CodeRequest input) {
+        System.out.println("/execute POST called...");
+
         System.out.println("token: " + token);
         System.out.println("input.code: " + input.code);
 

@@ -21,6 +21,7 @@ public class LoginController {
 	@CrossOrigin(origins = "*")
     @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     LoginResponse login(@RequestBody LoginRequest input) {
+        System.out.println("login POST called...");
         var authenticated = false;
 
         User user = User.fetch(input.username);

@@ -17,6 +17,8 @@ public class AsciiController {
                     consumes = "application/json",
                     produces = "application/json") 
     AsciiResponse executeCode(@RequestHeader(value="x-auth-token") String token, @RequestBody AsciiRequest input) {
+        System.out.println("/asciiart POST called...");
+
         System.out.println("token: " + token);
         System.out.println("input.text: " + input.text);
 
