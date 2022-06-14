@@ -1,12 +1,6 @@
 package com.cloudacademy.controllers;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import com.cloudacademy.Comment;
 import com.cloudacademy.CommentRequest;
@@ -18,7 +12,9 @@ import java.util.List;
 public class CommentsController {
 
   @CrossOrigin(origins = "*")
-  @RequestMapping(value = "/comments", method = RequestMethod.GET, produces = "application/json")
+  @RequestMapping(value = "/comments", 
+                  method = RequestMethod.GET, 
+                  produces = "application/json")
   List<Comment> comments(@RequestHeader(value="x-auth-token") String token) {
     System.out.println("/comments GET called...");
     
