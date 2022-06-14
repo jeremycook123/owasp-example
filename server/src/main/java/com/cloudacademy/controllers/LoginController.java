@@ -19,6 +19,8 @@ public class LoginController {
         var authenticated = false;
 
         User user = User.fetch(input.username);
+        System.out.println("database hash=" + user.hashedPassword);
+        System.out.println("java hash=" + Postgres.md5(input.password));
         if (Postgres.md5(input.password).equals(user.hashedPassword)) {
           authenticated = true;
         } 
