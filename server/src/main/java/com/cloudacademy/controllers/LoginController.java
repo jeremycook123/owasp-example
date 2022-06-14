@@ -1,19 +1,13 @@
 package com.cloudacademy.controllers;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import com.cloudacademy.LoginRequest;
 import com.cloudacademy.LoginResponse;
 import com.cloudacademy.Unauthorized;
 import com.cloudacademy.jwt.TokenManagement;
 import com.cloudacademy.User;
 import com.cloudacademy.database.Postgres;
-
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 @RestController
 @EnableAutoConfiguration

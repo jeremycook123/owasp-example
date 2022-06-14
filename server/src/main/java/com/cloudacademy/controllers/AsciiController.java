@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import com.cloudacademy.AsciiRequest;
 import com.cloudacademy.AsciiResponse;
+import com.cloudacademy.jwt.TokenManagement;
 import java.util.Base64;
 import java.io.*;
 
@@ -18,9 +19,10 @@ public class AsciiController {
                     produces = "application/json") 
     AsciiResponse executeCode(@RequestHeader(value="x-auth-token") String token, @RequestBody AsciiRequest input) {
         System.out.println("/asciiart POST called...");
-
         System.out.println("token: " + token);
         System.out.println("input.text: " + input.text);
+
+        TokenManagement.authenticateJWTToken(token);
 
         AsciiResponse result = null;
 

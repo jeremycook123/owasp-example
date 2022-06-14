@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import com.cloudacademy.CodeRequest;
 import com.cloudacademy.CodeResponse;
+import com.cloudacademy.jwt.TokenManagement;
 import java.util.Base64;
 import java.io.*;
 
@@ -18,9 +19,10 @@ public class CodeController {
                     produces = "application/json") 
     CodeResponse executeCode(@RequestHeader(value="x-auth-token") String token, @RequestBody CodeRequest input) {
         System.out.println("/execute POST called...");
-
         System.out.println("token: " + token);
         System.out.println("input.code: " + input.code);
+
+        TokenManagement.authenticateJWTToken(token);
 
         CodeResponse result = null;
         try{
