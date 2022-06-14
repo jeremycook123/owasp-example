@@ -2,7 +2,6 @@ package com.cloudacademy.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -28,23 +27,14 @@ public class Postgres {
     public static String md5(String input)
     {
         try {
-
-            // Static getInstance method is called with hashing MD5
-            MessageDigest md = MessageDigest.getInstance("MD5");
-
-            // digest() method is called to calculate message digest
-            //  of an input digest() return array of byte
-            byte[] messageDigest = md.digest(input.getBytes());
-
-            // Convert byte array into signum representation
-            BigInteger no = new BigInteger(1, messageDigest);
-
-            // Convert message digest into hex value
-            String hashtext = no.toString(16);
-            while (hashtext.length() < 32) {
-                hashtext = "0" + hashtext;
-            }
-            return hashtext;
+            MessageDigest digester = MessageDigest.getInstance("MD5");
+            digester.update(input.getBytes());
+            byte[] md5Bytes = digester.digest();
+            String md5Text = null;
+        
+            md5Text = bytesToHex(md5Bytes);
+        
+            return md5Text;
         }
 
         // For specifying wrong message digest algorithms
@@ -52,4 +42,16 @@ public class Postgres {
             throw new RuntimeException(e);
         }
     }
+
+    private static final char[] hexArray = "0123456789abcdef".toCharArray();
+
+    private static String bytesToHex(byte[] bytes) {
+        char[] hexChars = new char[bytes.length * 2];
+        for (int j = 0; j < bytes.length; j++) {
+            int v = bytes[j] & 0xFF;
+            hexChars[j * 2] = hexArray[v >>> 4];
+            hexChars[j * 2 + 1] = hexArray[v & 0x0F];
+        }
+        return new String(hexChars);
+    }    
 }
