@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.cloudacademy</groupId>
   <artifactId>webapp-insecure</artifactId>
-  <packaging>jar</packaging>
+  <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>webapp-insecure</name>
   <url>http://maven.apache.org</url>
@@ -11,6 +11,8 @@
   <properties>
     <maven.compiler.source>18</maven.compiler.source>
     <maven.compiler.target>18</maven.compiler.target>
+    <timestamp>${maven.build.timestamp}</timestamp>
+    <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
   </properties>
 
   <parent>
@@ -47,13 +49,26 @@
     </dependency>
   </dependencies>
 
-
 	<build>
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>3.2.0</version>
+      </plugin>      
     </plugins>
+    <resources>
+      <resource>
+          <filtering>true</filtering>
+          <directory>src/main/resources</directory>
+          <includes>
+              <include>application.properties</include>
+          </includes>
+      </resource>
+    </resources>
 	</build>  
 </project>
