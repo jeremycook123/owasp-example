@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
 export const AsciiArtPage = () => {
     const [text, setText] = useState('');
@@ -34,19 +36,36 @@ export const AsciiArtPage = () => {
 
     return (
         <>
-            <TextField 
-                id="outlined-basic" 
-                label="Text" 
-                variant="outlined"
-                value={text}
-                onInput={ e=>setText(e.target.value) }
-            />
-            <Button variant="contained" onClick={handleClick}>Generate</Button>
-            <pre>
-                <code>
-                   {output}
-                </code>
-            </pre>
+            <Box sx={{ m: 2, fontFamily: 'default' }} >
+                <Typography component="h1" variant="h5">
+                    Ascii Art Generator:
+                </Typography>
+            </Box>
+            <Box
+                sx={{
+                m: 2,
+                marginTop: 2,
+                }}
+            >
+                <TextField 
+                    id="outlined-basic" 
+                    label="Text" 
+                    variant="outlined"
+                    value={text}
+                    style = {{width: 400}}
+                    onInput={ e=>setText(e.target.value) }
+                />
+            </Box>
+            <Box sx={{ m: 2 }} >
+                <Button variant="contained" onClick={handleClick}>Generate</Button>
+            </Box>
+            <Box sx={{ m: 2 }} >
+                <pre>
+                    <code>
+                        {output}
+                    </code>
+                </pre>
+            </Box>
         </>
     );
 }

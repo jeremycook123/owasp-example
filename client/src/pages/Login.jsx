@@ -2,13 +2,10 @@ import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { Link as RouterLink } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
 export const LoginPage = () => {
@@ -18,7 +15,7 @@ export const LoginPage = () => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     login({
-      username: data.get("email"),
+      username: data.get("username"),
       password: data.get("password")
     });
   };
@@ -44,10 +41,9 @@ export const LoginPage = () => {
             margin="normal"
             required
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
+            id="username"
+            label="Username"
+            name="username"
             autoFocus
           />
           <TextField
@@ -58,7 +54,6 @@ export const LoginPage = () => {
             label="Password"
             type="password"
             id="password"
-            autoComplete="current-password"
           />
           <Button
             type="submit"
