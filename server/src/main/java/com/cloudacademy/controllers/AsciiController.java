@@ -2,9 +2,9 @@ package com.cloudacademy.controllers;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import com.cloudacademy.AsciiRequest;
-import com.cloudacademy.AsciiResponse;
 import com.cloudacademy.jwt.TokenManagement;
+import com.cloudacademy.serializable.AsciiRequest;
+import com.cloudacademy.serializable.AsciiResponse;
 import java.util.Base64;
 import java.io.*;
 

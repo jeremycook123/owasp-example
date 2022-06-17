@@ -2,9 +2,12 @@ package com.cloudacademy.controllers;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import com.cloudacademy.Comment;
-import com.cloudacademy.CommentRequest;
+
 import com.cloudacademy.jwt.TokenManagement;
+import com.cloudacademy.pojo.Comment;
+import com.cloudacademy.serializable.CommentRequest;
+import com.cloudacademy.service.CommentService;
+
 import java.util.List;
 
 @RestController
@@ -19,7 +22,9 @@ public class CommentsController {
     System.out.println("/comments GET called...");
     
     TokenManagement.authenticateJWTToken(token);
-    return Comment.fetch_all();
+    var allComments = CommentService.getAllComments();
+  
+    return allComments;
   }
 
   @CrossOrigin(origins = "*")
@@ -31,8 +36,9 @@ public class CommentsController {
     System.out.println("input.body: " + input.body);
     
     TokenManagement.authenticateJWTToken(token);
+    var newComment = CommentService.createComment(input.username, input.body);
 
-    return Comment.create(input.username, input.body);
+    return newComment;
   }
 
   @CrossOrigin(origins = "*")
@@ -41,7 +47,8 @@ public class CommentsController {
     System.out.println("/comments DELETE called...");
     
     TokenManagement.authenticateJWTToken(token);
+    var deletedOk = CommentService.deleteComment(id);
 
-    return Comment.delete(id);
+    return deletedOk;
   }
 }

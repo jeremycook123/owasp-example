@@ -1,4 +1,4 @@
-package com.cloudacademy;
+package com.cloudacademy.serializable;
 
 import java.io.Serializable;
 

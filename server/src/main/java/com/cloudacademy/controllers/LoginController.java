@@ -2,11 +2,12 @@ package com.cloudacademy.controllers;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import com.cloudacademy.LoginRequest;
-import com.cloudacademy.LoginResponse;
 import com.cloudacademy.Unauthorized;
 import com.cloudacademy.jwt.TokenManagement;
-import com.cloudacademy.User;
+import com.cloudacademy.pojo.User;
+import com.cloudacademy.serializable.LoginRequest;
+import com.cloudacademy.serializable.LoginResponse;
+import com.cloudacademy.service.UserService;
 import com.cloudacademy.crypto.Hash;
 
 @RestController
@@ -22,7 +23,7 @@ public class LoginController {
         System.out.println("login POST called...");
         var authenticated = false;
 
-        User user = User.fetch(input.username);
+        User user = UserService.getUser(input.username);
 
         System.out.println("database hash=" + user.hashedPassword);
         System.out.println("java hash=" + Hash.md5(input.password));
